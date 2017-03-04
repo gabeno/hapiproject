@@ -13,6 +13,21 @@ server.start(function(err){
     console.log('Server running at: ', server.info.uri)
 })
 
+server.register([
+    {register: require('vision')}, // template rendering
+    {register: require('inert')}   // static files
+], function(err){
+    if (err) {
+        throw err;
+    }
+    // set view configuration in plugin register callback
+    server.views({
+        engines: {
+            html: require('handlebars')
+        }
+    })
+})
+
 server.route({
     method: 'GET',
     path: '/',
