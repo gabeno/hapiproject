@@ -13,25 +13,34 @@ server.start(function(err){
     console.log('Server running at: ', server.info.uri)
 })
 
-server.register([
-    {register: require('vision')}, // template rendering
-    {register: require('inert')}   // static files
-], function(err){
+server.register(require('vision'), function(err){
     if (err) {
+        console.log('Can not register vision')
         throw err;
     }
     // set view configuration in plugin register callback
     server.views({
         engines: {
             html: require('handlebars')
-        }
+        },
+        path: __dirname + '/views',
+        layout: 'layout'
     })
 })
 
 server.route({
     method: 'GET',
-    path: '/',
+    path: '/hello',
     handler: function(request, reply){
-        reply('Hello world!')
+        var data = {message: 'Hello world!'}
+        reply.view('index', data)
+    }
+})
+
+server.route({
+    method: 'GET',
+    path: '/',
+    handler: {
+        view: 'index'
     }
 })
