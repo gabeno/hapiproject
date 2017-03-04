@@ -27,18 +27,22 @@ server.register(require('vision'), function(err){
         layoutPath: 'views/layout',
         layout: 'default',
         //helpersPath: 'views/helpers',
-        //partialsPath: 'views/partials'
+        partialsPath: 'views/partials'
     })
 })
 
-server.route({
-    method: 'GET',
-    path: '/',
-    handler: function(request, reply) {
-        var data = {
-            title: 'Index Page!',
-            message: 'Hello world :)'
+var routes = [
+    {
+        method: 'GET',
+        path: '/',
+        handler: function(request, reply) {
+            var data = {
+                title: 'Index Page!',
+                message: 'Hello world :)'
+            }
+            reply.view('index', data)
         }
-        reply.view('index', data)
     }
-})
+]
+
+server.route(routes)
