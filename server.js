@@ -24,23 +24,21 @@ server.register(require('vision'), function(err){
             html: require('handlebars')
         },
         path: __dirname + '/views',
-        layout: 'layout'
+        layoutPath: 'views/layout',
+        layout: 'default',
+        //helpersPath: 'views/helpers',
+        //partialsPath: 'views/partials'
     })
 })
 
 server.route({
     method: 'GET',
-    path: '/hello',
-    handler: function(request, reply){
-        var data = {message: 'Hello world!'}
-        reply.view('index', data)
-    }
-})
-
-server.route({
-    method: 'GET',
     path: '/',
-    handler: {
-        view: 'index'
+    handler: function(request, reply) {
+        var data = {
+            title: 'Index Page!',
+            message: 'Hello world :)'
+        }
+        reply.view('index', data)
     }
 })
