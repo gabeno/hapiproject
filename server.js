@@ -26,7 +26,7 @@ server.register(require('vision'), function(err){
         path: __dirname + '/views',
         layoutPath: 'views/layout',
         layout: 'default',
-        //helpersPath: 'views/helpers',
+        helpersPath: 'views/helpers',
         partialsPath: 'views/partials'
     })
 })
@@ -38,7 +38,10 @@ var routes = [
         handler: function(request, reply) {
             var data = {
                 title: 'Index Page!',
-                message: 'Hello world :)'
+                message: 'Hello world :)',
+                user: {
+                    role: 'user' // role: 'owner' admin link
+                }
             }
             reply.view('index', data)
         }

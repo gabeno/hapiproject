@@ -10,4 +10,9 @@
             </div>
         </div>
     </nav>
+    {{#isAdmin}}
+        {{! show admin navigation}}
+        <h2>Admin Navigation</h2>
+        <a href='/super/secret/admin/link'>Secret Link</a>
+    {{/isAdmin}}
 </header>
